@@ -2,13 +2,15 @@
 
 Aplicação para agendamento de tarefas.
 
-> Frontend: *[ReactJS](https://pt-br.reactjs.org/)*.
-> Backend: *[NodeJS](https://nodejs.org/en/)*
-> Banco: KnexJS - *[SQLite](http://knexjs.org/#Installation-node)*
+> Frontend: *[ReactJS](https://pt-br.reactjs.org/)*. <br>
+> Backend: *[NodeJS](https://nodejs.org/en/)*. <br>
+> Banco: KnexJS - *[SQLite](http://knexjs.org/#Installation-node)*. <br>
 
 Instalação:
-`npm install`
+`npm install` <br>
 Backend:
-`npm start`
+`cd backend/` <br>
+`npm start` <br>
 Frontend:
-`npm start`
+`cd frontend/` <br>
+`npm start` <br>
