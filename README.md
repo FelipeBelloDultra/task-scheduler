@@ -6,11 +6,11 @@ Aplicação para agendamento de tarefas.
 > Backend: *[NodeJS](https://nodejs.org/en/)*. <br>
 > Banco: KnexJS - *[SQLite](http://knexjs.org/#Installation-node)*. <br>
 
-Instalação:
+Instalação: <br>
 `npm install` <br>
-Backend:
+Backend: <br>
 `cd backend/` <br>
 `npm start` <br>
-Frontend:
+Frontend: <br>
 `cd frontend/` <br>
 `npm start` <br>
