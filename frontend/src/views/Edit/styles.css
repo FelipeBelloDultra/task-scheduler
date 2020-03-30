@@ -1,0 +1,45 @@
+
+.container-edit {
+  padding: 30px 40px;  
+}
+
+.container-edit form input, textarea {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
+
+.container-edit form .container-edit-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-edit form .edit-btn, .back-btn, .create-btn {
+  text-decoration: none;
+  cursor: pointer;
+  margin: 20px;
+  font-size: 14pt;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: filter 0.5s;
+}
+
+.container-edit form .edit-btn {
+  background-color: #ffc107;
+}
+
+.container-edit form .create-btn {
+  color: #ffffff;
+  background-color: #28a745;
+}
+
+.container-edit form .back-btn {
+  background-color: #ffffff;
+}
+
+.container-edit form .edit-btn:hover, .back-btn:hover, .create-btn:hover {
+  filter: brightness(80%);
+}
