@@ -4,13 +4,13 @@ const routes = Router();
 
 const TasksController = require('./controllers/TasksController');
 
-routes.get('/tasks/list', TasksController.getTask);
+routes.get('/tasks/list', TasksController.index);
 
 routes.get('/tasks/list/:id', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required()
   })
-}), TasksController.getOneTask);
+}), TasksController.show);
 
 routes.post('/tasks/create', celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -18,18 +18,19 @@ routes.post('/tasks/create', celebrate({
     title: Joi.string().required(),
     description: Joi.string().required()
   })
-}), TasksController.postTask);
+}), TasksController.store);
 
-routes.put('/tasks/update/:id', celebrate({
-  [Segments.PARAMS]: Joi.object().keys({
-    id: Joi.number().required()
-  })
-}), TasksController.putTask);
 routes.delete('/tasks/delete/:id', celebrate({
 
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required()
   })
-}), TasksController.deleteTask);
+}), TasksController.destroy);
+
+routes.put('/tasks/update/:id', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required()
+  })
+}), TasksController.update);
 
 module.exports = routes;

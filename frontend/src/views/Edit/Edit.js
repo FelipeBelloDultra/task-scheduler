@@ -9,7 +9,7 @@ const Edit = (props) => {
   const history = useHistory();
   const [value, setValue] = useState({});
 
-  const gettask = async (id) => {
+  const getTask = async (id) => {
     const response = await api.get(`/tasks/list/${id}`);
 
     setValue(response.data[0]);
@@ -17,12 +17,23 @@ const Edit = (props) => {
 
   useEffect(() => {
     const id = props.match.params.id;
-
-    gettask(id);
+    document.title = 'Editar Tarefa';
+    getTask(id);
 
   }, [props.match.params.id]);
 
-  const handlePuttask = async (event) => {
+  const handleClearTask = (event) => {
+    event.preventDefault();
+
+    setValue({
+      ...value,
+      type: '',
+      title: '',
+      description: '',
+    });
+  };
+
+  const handlePutTask = async (event) => {
     event.preventDefault();
     const id = props.match.params.id;
 
@@ -38,7 +49,7 @@ const Edit = (props) => {
   return (
     <div className="container">
       <div className="container-edit">
-        <form onSubmit={handlePuttask}>
+        <form onSubmit={handlePutTask}>
 
           <input
             placeholder="Tipo"
@@ -75,12 +86,7 @@ const Edit = (props) => {
               />
               Voltar
             </Link>
-            <Link
-              className="back-link create-btn"
-              to="/create"
-            >
-              Criar Tarefa
-            </Link>
+            <button className="create-btn" onClick={handleClearTask}>Limpar</button>
             <button className="edit-btn" type="submit">Alterar</button>
           </div>
         </form>

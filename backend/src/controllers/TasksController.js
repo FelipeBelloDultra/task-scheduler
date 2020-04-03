@@ -1,7 +1,7 @@
 const connection = require('../database/connection');
 
 module.exports = {
-  async getTask(req, res) {
+  async index(req, res) {
     try {
       const task = await connection('tasks').select('*');
 
@@ -11,7 +11,7 @@ module.exports = {
     }
   },
 
-   async getOneTask(req, res) {
+   async show(req, res) {
     try {
       const { id } = req.params;
 
@@ -24,7 +24,7 @@ module.exports = {
     }
   },
 
-  async postTask(req, res) {
+  async store(req, res) {
     try {
       const { type, title, description } = req.body;
 
@@ -40,7 +40,7 @@ module.exports = {
     }
   },
 
-  async deleteTask(req, res) {
+  async destroy(req, res) {
     try {
       const { id } = req.params;
 
@@ -54,7 +54,7 @@ module.exports = {
 
   },
 
-  async putTask(req, res) {
+  async update(req, res) {
     const { id } = req.params;
     const { type, title, description } = req.body;
     try {

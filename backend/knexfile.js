@@ -2,10 +2,24 @@
 
 module.exports = {
 
+  // development: {
+  //   client: 'sqlite3',
+  //   connection: {
+  //     filename: './src/database/db.sqlite'
+  //   },
+  //   migrations: {
+  //     directory: './src/database/migrations'
+  //   },
+  //   useNullAsDefault: true
+  // },
+
   development: {
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-      filename: './src/database/db.sqlite'
+      host: '127.0.0.1',
+      user: 'root',
+      password: '',
+      database: 'tasks'
     },
     migrations: {
       directory: './src/database/migrations'

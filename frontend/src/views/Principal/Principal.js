@@ -17,10 +17,11 @@ const Principal = () => {
   };
 
   useEffect(() => {
+    document.title = 'Lista de Tarefas';
     getTasks();
   }, []);
 
-  const handleDeleltetask = async (id) => {
+  const handleDeleteTask = async (id) => {
     try {
       await api.delete(`/tasks/delete/${id}`);
 
@@ -56,7 +57,7 @@ const Principal = () => {
             </p>
             <button
               type="button"
-              onClick={() => handleDeleltetask(task.id)}
+              onClick={() => handleDeleteTask(task.id)}
             >
               <FiTrash2
                 size={20}

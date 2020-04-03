@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
@@ -12,7 +12,19 @@ const Create = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmittask = async (event) => {
+  useEffect(() => {
+    document.title = 'Criar Tarefa';
+  });
+
+  const handleClearTask = (event) => {
+    event.preventDefault();
+
+    setType('');
+    setTitle('');
+    setDescription('');
+  };
+
+  const handleSubmitTask = async (event) => {
     event.preventDefault();
 
     await api.post('/tasks/create', {
@@ -27,7 +39,7 @@ const Create = () => {
   return (
     <div className="container">
       <div className="container-create">
-        <form onSubmit={handleSubmittask}>
+        <form onSubmit={handleSubmitTask}>
           <input
             value={type}
             onChange={(event) => setType(event.target.value)}
@@ -52,6 +64,7 @@ const Create = () => {
               />
               Voltar
             </Link>
+            <button className="edit-btn" onClick={handleClearTask}>Limpar</button>
             <button className="create-btn" type="submit">Adicionar tarefa</button>
           </div>
         </form>

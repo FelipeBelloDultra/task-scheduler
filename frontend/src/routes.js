@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import {
   Create,
@@ -14,17 +14,26 @@ const Routes = () => {
         <Route
           path="/"
           exact
-          component={Principal} />
+          render={() => <Redirect to="/home" />}
+        />
+
+        <Route
+          path="/home"
+          exact
+          component={Principal}
+        />
 
         <Route
           path="/create"
           exact
-          component={Create} />
+          component={Create}
+        />
 
         <Route
           path="/edit/:id"
           exact
-          component={Edit} />
+          component={Edit}
+        />
       </Switch>
     </BrowserRouter>
   );
