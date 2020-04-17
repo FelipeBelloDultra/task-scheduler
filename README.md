@@ -12,7 +12,7 @@ Aplicação para agendamento de tarefas.
 Backend:
 
 ```
-var backend
+cd backend
 
 npm install
 
