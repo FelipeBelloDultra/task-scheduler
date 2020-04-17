@@ -1,75 +1,115 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import {
+  Box,
+  Button,
+  Input,
+  CircularProgress,
+  Backdrop
+} from '@material-ui/core';
 
-import './styles.css';
+import styles from './styles.js';
 import api from '../../services/api';
+import SnackBarCustom from '../../components/SnackBarCustom';
 
 const Create = () => {
   const history = useHistory();
+  const classes = styles();
 
   const [type, setType] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [open, setOpen] = useState(false);
+  const [snack, setSnack] = useState({
+    open: false,
+    message: '',
+    tipo: 'success',
+  });
 
   useEffect(() => {
     document.title = 'Criar Tarefa';
   });
 
   const handleClearTask = (event) => {
+    setOpen(true);
     event.preventDefault();
 
     setType('');
     setTitle('');
     setDescription('');
+    setOpen(false);
   };
 
   const handleSubmitTask = async (event) => {
-    event.preventDefault();
+    try {
+      setOpen(true);
+      event.preventDefault();
 
-    await api.post('/tasks/create', {
-      type,
-      title,
-      description
-    });
+      await api.post('/tasks/create', {
+        type,
+        title,
+        description
+      });
 
-    history.push('/');
+      setOpen(false);
+      history.push('/');
+    } catch (error) {
+      setSnack({
+        open: true,
+        message: 'Erro ao criar tarefa!',
+        tipo: 'error',
+      });
+      setOpen(false);
+    }
   };
 
   return (
-    <div className="container">
-      <div className="container-create">
-        <form onSubmit={handleSubmitTask}>
-          <input
+    <Box className={classes.container}>
+      <Box component="div" className={classes.form}>
+        <Box className={classes.formInput}>
+          <Input
+            className={classes.input}
+            placeholder="Tipo"
             value={type}
             onChange={(event) => setType(event.target.value)}
-            placeholder="Tipo"
           />
-          <input
+          <Input
+            className={classes.input}
+            placeholder="Titulo"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            placeholder="Titulo"
           />
-          <textarea value={description}
+          <Input
+            className={classes.textarea}
+            placeholder="Descrição"
+            value={description}
             onChange={(event) => setDescription(event.target.value)}
-            placeholder="Descrição"></textarea>
-          <div className="container-create-buttons">
-            <Link
-              className="back-link back-btn"
-              to="/"
-            >
-              <FiArrowLeft
-                size={16}
-                color="#000"
-              />
-              Voltar
-            </Link>
-            <button className="edit-btn" onClick={handleClearTask}>Limpar</button>
-            <button className="create-btn" type="submit">Adicionar tarefa</button>
-          </div>
-        </form>
-      </div>
-    </div>
+          />
+
+        </Box>
+        <Box component="div" className={classes.formButtons}>
+          <Button className={classes.buttonWhite} onClick={() => { history.push('/home') }}>
+            <FiArrowLeft
+              size={16}
+              color="#000"
+            />
+            Voltar
+          </Button>
+          <Button className={classes.buttonWarning} onClick={handleClearTask}>Limpar</Button>
+          <Button className={classes.buttonSucess} onClick={handleSubmitTask}>Salvar tarefa</Button>
+        </Box>
+      </Box>
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <SnackBarCustom
+        handleClose={() => { setSnack({ ...snack, open: false }) }}
+        open={snack.open}
+        variant={snack.tipo}
+        message={snack.message}
+      />
+    </Box>
   );
 };
 

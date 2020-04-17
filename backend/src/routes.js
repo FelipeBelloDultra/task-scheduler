@@ -31,6 +31,12 @@ routes.put('/tasks/update/:id', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required()
   })
+}), celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    type: Joi.string().required(),
+    title: Joi.string().required(),
+    description: Joi.string().required()
+  })
 }), TasksController.update);
 
 module.exports = routes;
