@@ -3,6 +3,7 @@ const { celebrate, Segments, Joi } = require('celebrate');
 const routes = Router();
 
 const TasksController = require('./controllers/TasksController');
+const CheckTaskController = require('./controllers/CheckTaskController');
 
 routes.get('/tasks/list', TasksController.index);
 
@@ -38,5 +39,15 @@ routes.put('/tasks/update/:id', celebrate({
     description: Joi.string().required()
   })
 }), TasksController.update);
+
+routes.put('/tasks/check/:id', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required()
+  })
+}), celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    check: Joi.boolean().required()
+  })
+}), CheckTaskController.upadte);
 
 module.exports = routes;

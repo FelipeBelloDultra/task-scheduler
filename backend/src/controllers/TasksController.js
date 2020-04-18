@@ -3,7 +3,9 @@ const connection = require('../database/connection');
 module.exports = {
   async index(req, res) {
     try {
-      const task = await connection('tasks').select('*');
+      const task = await connection('tasks').select('*').where({
+        check: "false",
+      });
 
       res.json(task);
     } catch (error) {
@@ -31,7 +33,8 @@ module.exports = {
       await connection('tasks').insert({
         type,
         title,
-        description
+        description,
+        check: "false"
       });
 
       return res.json({ message: 'ok' });
